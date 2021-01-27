@@ -9,7 +9,11 @@ app.get("/", (req, res) => {
 })
 
 app.get("/json", (req, res) => {
-  res.json({"message": "Hello json"});
+  const response = { "message": "Hello json" }
+  if (process.env.MESSAGE_STYLE === 'uppercase') {
+    response.message = response.message.toUpperCase();
+  }
+  res.json(response);
 })
 
- module.exports = app;
+module.exports = app;
