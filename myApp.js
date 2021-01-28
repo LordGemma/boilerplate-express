@@ -20,4 +20,12 @@ app.get("/json", (req, res) => {
   res.json(response);
 })
 
+app.get('/now', (req, res, next) => {
+  req.time = new Date().toString();
+  next();
+}, (req, res) => {
+  const response = { "time": req.time }
+  res.json(response);
+})
+
 module.exports = app;
