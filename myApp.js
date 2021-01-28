@@ -28,4 +28,8 @@ app.get('/now', (req, res, next) => {
   res.json(response);
 })
 
+app.get("/:word/echo", (req, res) => {
+  res.json({"echo": req.params.word})
+})
+
 module.exports = app;
