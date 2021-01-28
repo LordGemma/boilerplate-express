@@ -1,7 +1,10 @@
 const path = require("path");
+const mongoose = require("mongoose");
 const bodyParser = require("body-parser")
 const express = require('express');
 const app = express();
+
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(__dirname + "/public"));
@@ -39,7 +42,7 @@ app.route("/name").get((req, res) => {
   res.json({ "name": `${first} ${last}`})
 }).post((req, res) => {
   const {first, last} = req.body;
-  res.json({ "name": `${first} ${last}`})
+  res.json({ "name": `${first} ${last}`});
 })
 
 module.exports = app;
