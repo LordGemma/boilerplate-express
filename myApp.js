@@ -1,7 +1,9 @@
 const path = require("path");
+const bodyParser = require("body-parser")
 const express = require('express');
 const app = express();
 
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(__dirname + "/public"));
 app.use('/json', (req, res, next) => {
   console.log(`${req.method} ${req.path} - ${req.ip}`)
@@ -34,6 +36,9 @@ app.get("/:word/echo", (req, res) => {
 
 app.route("/name").get((req, res) => {
   const {first, last} = req.query;
+  res.json({ "name": `${first} ${last}`})
+}).post((req, res) => {
+  const {first, last} = req.body;
   res.json({ "name": `${first} ${last}`})
 })
 
